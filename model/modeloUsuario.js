@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const TipoDocumentoSchema = require("./tipoDocumento");
+const tipodocumentos = require("./modelTipoDocumento");
 const Schema = mongoose.Schema;
 
 const UsuarioSchema = new Schema({
   name: { type: String, required: true },
-  lastName: { type: String, required: true },
-  typeOfDocument: { type: Schema.ObjectId, ref: TipoDocumentoSchema },
+  _idtypeOfDocument: { type: Schema.ObjectId, ref: tipodocumentos },
   identification: { type: Number, required: true },
   mobileNumber: { type: Number, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
+  role: { type: String, required: true },
 });
 
 UsuarioSchema.statics.encryptPassword = async (password) => {

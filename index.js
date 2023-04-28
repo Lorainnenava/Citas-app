@@ -5,6 +5,8 @@ const port = 8900;
 const usuarios = require("./routes/usuario");
 const citas = require("./routes/citas");
 const documento = require("./routes/documento");
+const doctor = require("./routes/doctor");
+const especialidad = require("./routes/especialidad");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -15,9 +17,11 @@ app.use(
   })
 );
 app.use(express.json());
-app.use("/usuario", usuarios);
-app.use("/citas", citas);
 app.use("/documento", documento);
+app.use("/usuario", usuarios);
+app.use("/especialidad", especialidad);
+app.use("/citas", citas);
+app.use("/doctor", doctor);
 
 app.get("/", function (req, res) {
   res.json("Bienvenido");
