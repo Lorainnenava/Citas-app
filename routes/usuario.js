@@ -16,7 +16,7 @@ usuarios.post("/", async (req, res) => {
     !usuario.password ||
     !usuario.email
   )
-    return res.status(400).json({ msg: "Rellenar todos los campos" });
+     res.status(400).json({ msg: "Rellenar todos los campos" });
   try {
     const exitedUser = await UsuarioSchema.findOne({ email: usuario.email });
     if (exitedUser)
@@ -33,7 +33,7 @@ usuarios.post("/", async (req, res) => {
       password: await UsuarioSchema.encryptPassword(usuario.password),
     });
     await newUser.save();
-    res.json({ msg: "usuario creado con exito" });
+    res.json({ msg: "usuario creado con éxito" });
   } catch (error) {
     res.status(500).json({ msg: "ha ocurrido un error" });
   }
@@ -42,25 +42,28 @@ usuarios.post("/", async (req, res) => {
 // LOGEAR USUARIO
 
 usuarios.patch("/", async (req, res) => {
-  const { email, password } = req.body;
-  if (!email || !password) res.json({ msg: "Rellene los campos" });
+  const { body } = req;
+  const { email, password } = body;
+  if (!email || !password) return res.json({ msg: "Rellene los campos" });
   try {
     const user = await UsuarioSchema.findOne({
       email: email,
     });
-    if (!user) res.status(404).json({ msg: "usuario no encontrado" });
+    if (!user) return res.status(404).json({ msg: "usuario no encontrado" });
     const passwordCorrect = await UsuarioSchema.comparePassword(
       req.body.password,
       user.password
     );
-    if (!passwordCorrect)
-      res.status(404).json({ token: null, msg: "contraseña incorrecta" });
+    if (!passwordCorrect | !user)
+      return res
+        .status(404)
+        .json({ token: null, msg: "Usuario no encontrado" });
     const token = jwt.sign({ user }, process.env.SECRET_KEY, {
       expiresIn: 60 * 60,
     });
-    res.json({ user, msg: "Iniciastes sesion", token });
+    return res.json({ user, msg: "Iniciaste sesión", token });
   } catch (error) {
-    res.json({ msg: error });
+    return res.json({ msg: error });
   }
 });
 
