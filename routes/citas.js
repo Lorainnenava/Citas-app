@@ -5,16 +5,15 @@ const CitasSchema = require("../model/modeloCitas");
 
 //CREAR CITA
 citas.post("/", verifyToken, async (req, res) => {
-  const cita = req.body;
-  const _idUsuario = req.headers._id;
-  if (!cita.fecha || !cita.doctor || !cita.especialidad)
+  const cita = CitasSchema(req.body);
+  if (!cita.date || !cita.doctor || !cita.specialty)
     res.json({ msg: "Rellene todos los campos" });
   try {
     const newCita = await CitasSchema({
+      _idUser: cita._idUser,
       doctor: cita.doctor,
-      especialidad: cita.especialidad,
-      fecha: cita.fecha,
-      _idUsuario: _idUsuario,
+      specialty: cita.specialty,
+      date: cita.date,
     });
     await newCita.save();
     res.json({ msg: "Cita creada con exito" });
@@ -26,7 +25,7 @@ citas.post("/", verifyToken, async (req, res) => {
 //MOSTRAR CITAS
 citas.get("/", verifyToken, async (req, res) => {
   const { _id } = req.headers;
-  CitasSchema.find({ _idUsuario: `${_id}` })
+  CitasSchema.find({ _idUser: `${_id}` })
     .then((data) => res.json(data))
     .catch((error) => res.json({ msg: error }));
 });

@@ -6,15 +6,15 @@ require("dotenv").config();
 
 //CREAR USUARIO
 usuarios.post("/", async (req, res) => {
-  const usuario = req.body;
+  const usuario = UsuarioSchema(req.body);
   if (
     !usuario.name ||
-    !usuario.lastName ||
-    !usuario.typeOfDocument ||
+    !usuario._idtypeOfDocument ||
     !usuario.identification ||
     !usuario.mobileNumber ||
     !usuario.password ||
-    !usuario.email
+    !usuario.email ||
+    !usuario.role
   )
      res.status(400).json({ msg: "Rellenar todos los campos" });
   try {
@@ -25,11 +25,11 @@ usuarios.post("/", async (req, res) => {
         .json({ msg: "Ya existe un correo con este nombre" });
     const newUser = new UsuarioSchema({
       name: usuario.name,
-      lastName: usuario.lastName,
-      typeOfDocument: usuario.typeOfDocument,
+      _idtypeOfDocument: usuario._idtypeOfDocument,
       identification: usuario.identification,
       mobileNumber: usuario.mobileNumber,
       email: usuario.email,
+      role: usuario.role,
       password: await UsuarioSchema.encryptPassword(usuario.password),
     });
     await newUser.save();
@@ -67,4 +67,10 @@ usuarios.patch("/", async (req, res) => {
   }
 });
 
+//VER USUARIOS
+usuarios.get("/", async (req, res) => {
+  UsuarioSchema.find()
+    .then((data) => res.json(data))
+    .catch((error) => res.json(error));
+});
 module.exports = usuarios;
