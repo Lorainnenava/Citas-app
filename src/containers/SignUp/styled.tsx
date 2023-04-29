@@ -6,11 +6,12 @@ export const Container = styled.div`
   margin: 0;
   padding: 0;
   min-width: 100vw;
+  min-height: 100vh;
   width: 100%;
-  height: 95%;
+  height: 100%;
 `;
 export const Form = styled.form`
-  max-width: 320px;
+  max-width: 420px;
   width: 100%;
   display: flex;
   flex-direction: column;

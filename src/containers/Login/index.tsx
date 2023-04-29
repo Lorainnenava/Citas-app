@@ -1,14 +1,34 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Container, ContenedorForm, Form } from "./styled";
-import { Stack, Typography, Button } from "@mui/material";
+import { Stack, Typography, Button, CircularProgress } from "@mui/material";
 import { CssTextField } from "../../styled";
+import { loginRequest } from "../../pages/axios/axiosStore";
+import { TypeAlertT } from "../../components/alert/types";
+import { AlertGeneral } from "../../components/alert";
+import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../apiZustand";
+import { useGetUserCheckedMutation } from "../../pages/redux/User/resApi";
 
 const Login = () => {
+  const setProfileAuth = useAuthStore((state: any) => state.setProfile);
+  /**
+   *Stages
+   */
+  const navigate = useNavigate();
   const [dataForm, setDataForm] = useState({
     email: "",
     password: "",
   });
   const [required, setRequired] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
+  const [showAlert, setShowAlert] = useState<TypeAlertT>({
+    message: "",
+    type: "success",
+    active: false,
+  });
+  const [User, { data: dateUser, isError, error, status }] =
+    useGetUserCheckedMutation();
+  if (isError) console.log(error);
 
   const handleCangue = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -18,7 +38,6 @@ const Login = () => {
       ...dataForm,
       [e.target.name]: e.target.value,
     });
-    console.log(dataForm);
   };
 
   /**
@@ -37,14 +56,44 @@ const Login = () => {
   /**
    * handleSubmit
    */
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    // const data = await loginRequest(dataForm);
     if (!dataForm?.email || !dataForm?.password) {
       setRequired(true);
+      setShowAlert({
+        active: true,
+        message: "Ha ocurrido una incidencia.",
+        type: "danger",
+        time: 2000,
+      });
     } else {
+      setLoading(true);
+      User(dataForm);
       setRequired(false);
     }
   };
+
+  useEffect(() => {
+    if (loading) {
+      if (error === undefined ) {
+        if (dateUser) {
+          setLoading(false);
+          setProfileAuth(dateUser);
+          navigate("/SignUp");
+        }
+      }
+      if (isError) {
+        setLoading(false);
+        setShowAlert({
+          active: true,
+          message: "Ha ocurrido una incidencia.",
+          type: "danger",
+          time: 2000,
+        });
+      }
+    }
+  }, [loading, dateUser, error, setProfileAuth, navigate, isError, status]);
   return (
     <Container>
       <Form onSubmit={handleSubmit}>
@@ -58,8 +107,8 @@ const Login = () => {
               name="email"
               id="outlined-basic"
               size="small"
-              Color={validateRequired(!dataForm?.email)}
-              borderColor={validateRequired(!dataForm?.email)}
+              colors={validateRequired(!dataForm?.email)}
+              bordercolors={validateRequired(!dataForm?.email)}
               onChange={handleCangue}
             />
             <CssTextField
@@ -68,15 +117,17 @@ const Login = () => {
               id="outlined-basic"
               size="small"
               onChange={handleCangue}
-              Color={validateRequired(!dataForm?.password)}
-              borderColor={validateRequired(!dataForm?.password)}
+              colors={validateRequired(!dataForm?.password)}
+              bordercolors={validateRequired(!dataForm?.password)}
             />
           </ContenedorForm>
         </Stack>
         <Button type="submit" variant="contained">
+          {loading ? <CircularProgress size={15} color="inherit" /> : ""}
           Login
         </Button>
       </Form>
+      <AlertGeneral setShowAlert={setShowAlert} showAlert={showAlert} />
     </Container>
   );
 };
