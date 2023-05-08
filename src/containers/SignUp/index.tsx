@@ -4,7 +4,15 @@ import { Typography, MenuItem } from "@mui/material";
 import { Stack } from "@mui/material";
 import { Button } from "@mui/material";
 import { CssSelect, CssTextField } from "../../styled";
-import { Container, ContenedorForm, Form } from "./styled";
+import {
+  Box,
+  BoxHeader,
+  Container,
+  ContenedorForm,
+  Form,
+  ImagenSignup,
+  Inicio,
+} from "./styled";
 import {
   useGetTypeDocumentQuery,
   usePostUserCreatedMutation,
@@ -15,11 +23,12 @@ import { TNewDataUser } from "./types";
 import { AlertGeneral } from "../../components/alert";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { isNumericValidation } from "../../adapter";
+import { BsHouseFill } from "react-icons/bs";
 const SignUp = () => {
   /**
    *Stages
    */
-  const navigate = useNavigate();
+  const navigation = useNavigate();
   const [dataForm, setDataForm] = useState<TNewDataUser>({
     name: "",
     _idtypeOfDocument: "",
@@ -44,7 +53,7 @@ const SignUp = () => {
   const dataSelects = {
     dataDocument: dataDocument,
   };
-  const [CreateNewUser, { data, error, isSuccess }] =
+  const [CreateNewUser] =
     usePostUserCreatedMutation();
 
   const handleChangue = (
@@ -66,7 +75,6 @@ const SignUp = () => {
       [event.target.name]: event.target.value,
     });
   };
-  console.log(dataForm);
 
   /**
    * Validad campos requeridos
@@ -86,7 +94,6 @@ const SignUp = () => {
    */
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // const data = await loginRequest(dataForm);
     if (
       !dataForm?.name ||
       !dataForm?._idtypeOfDocument ||
@@ -111,84 +118,101 @@ const SignUp = () => {
 
   return (
     <Container>
-      <Form onSubmit={handleSubmit}>
-        <Typography align="center" variant="h4" component="h2" color="white">
-          Sign Up
-        </Typography>
-        <Stack spacing={2}>
-          <ContenedorForm>
-            <CssTextField
-              label="Name"
-              name="name"
-              id="outlined-basic"
-              size="small"
-              onChange={handleChangue}
-              colors={validateRequired(!dataForm?.name)}
-              bordercolors={validateRequired(!dataForm?.name)}
-            />
-            <CssSelect
-              name="_idtypeOfDocument"
-              id="_id"
-              size="small"
-              onChange={handleChangueSelect}
-              value={dataForm?._idtypeOfDocument || ""}
-              colors={validateRequired(!dataForm?._idtypeOfDocument)}
-              bordercolors={validateRequired(!dataForm?._idtypeOfDocument)}
+      <Box>
+        <ImagenSignup></ImagenSignup>
+        <Form onSubmit={handleSubmit}>
+          <BoxHeader>
+            <Typography
+              align="center"
+              variant="h4"
+              component="h2"
+              color="white"
             >
-              {dataSelects?.dataDocument?.map((x) => {
-                return (
-                  <MenuItem value={x?._id} key={x?.typeOfDocument}>
-                    {x?.typeOfDocument}
-                  </MenuItem>
-                );
-              })}
-            </CssSelect>
-            <CssTextField
-              label="Identification"
-              name="identification"
-              id="outlined-basic"
-              size="small"
-              onChange={handleChangue}
-              colors={validateRequired(!dataForm?.identification)}
-              bordercolors={validateRequired(!dataForm?.identification)}
-            />
-            <CssTextField
-              label="Mobile Number"
-              name="mobileNumber"
-              type="text"
-              id="outlined-basic"
-              size="small"
-              onChange={(e) => {
-                handleChangue(e);
-              }}
-              colors={validateRequired(!dataForm?.mobileNumber)}
-              bordercolors={validateRequired(!dataForm?.mobileNumber)}
-            />
-            <CssTextField
-              label="Email"
-              name="email"
-              id="outlined-basic"
-              size="small"
-              onChange={handleChangue}
-              colors={validateRequired(!dataForm?.email)}
-              bordercolors={validateRequired(!dataForm?.email)}
-            />
-            <CssTextField
-              label="Password"
-              name="password"
-              id="outlined-basic"
-              size="small"
-              onChange={handleChangue}
-              colors={validateRequired(!dataForm?.password)}
-              bordercolors={validateRequired(!dataForm?.password)}
-            />
-          </ContenedorForm>
-        </Stack>
-        <Button type="submit" variant="contained">
-          SignUp
-        </Button>
-      </Form>
-      <AlertGeneral setShowAlert={setShowAlert} showAlert={showAlert} />
+              <b>SIGN UP</b>
+              <Inicio
+                onClick={() => {
+                  navigation("/Login");
+                }}
+              >
+                <BsHouseFill size={30} />
+              </Inicio>
+            </Typography>
+          </BoxHeader>
+          <Stack spacing={2}>
+            <ContenedorForm>
+              <CssTextField
+                label="Name"
+                name="name"
+                id="outlined-basic"
+                size="small"
+                onChange={handleChangue}
+                colors={validateRequired(!dataForm?.name)}
+                bordercolors={validateRequired(!dataForm?.name)}
+              />
+              <CssSelect
+                name="_idtypeOfDocument"
+                id="_id"
+                size="small"
+                onChange={handleChangueSelect}
+                value={dataForm?._idtypeOfDocument || ""}
+                colors={validateRequired(!dataForm?._idtypeOfDocument)}
+                bordercolors={validateRequired(!dataForm?._idtypeOfDocument)}
+              >
+                {dataSelects?.dataDocument?.map((x) => {
+                  return (
+                    <MenuItem value={x?._id} key={x?.typeOfDocument}>
+                      {x?.typeOfDocument}
+                    </MenuItem>
+                  );
+                })}
+              </CssSelect>
+              <CssTextField
+                label="Identification"
+                name="identification"
+                id="outlined-basic"
+                size="small"
+                onChange={handleChangue}
+                colors={validateRequired(!dataForm?.identification)}
+                bordercolors={validateRequired(!dataForm?.identification)}
+              />
+              <CssTextField
+                label="Mobile Number"
+                name="mobileNumber"
+                type="text"
+                id="outlined-basic"
+                size="small"
+                onChange={(e) => {
+                  handleChangue(e);
+                }}
+                colors={validateRequired(!dataForm?.mobileNumber)}
+                bordercolors={validateRequired(!dataForm?.mobileNumber)}
+              />
+              <CssTextField
+                label="Email"
+                name="email"
+                id="outlined-basic"
+                size="small"
+                onChange={handleChangue}
+                colors={validateRequired(!dataForm?.email)}
+                bordercolors={validateRequired(!dataForm?.email)}
+              />
+              <CssTextField
+                label="Password"
+                name="password"
+                id="outlined-basic"
+                size="small"
+                onChange={handleChangue}
+                colors={validateRequired(!dataForm?.password)}
+                bordercolors={validateRequired(!dataForm?.password)}
+              />
+            </ContenedorForm>
+          </Stack>
+          <Button type="submit" variant="contained">
+            SignUp
+          </Button>
+        </Form>
+        <AlertGeneral setShowAlert={setShowAlert} showAlert={showAlert} />
+      </Box>
     </Container>
   );
 };

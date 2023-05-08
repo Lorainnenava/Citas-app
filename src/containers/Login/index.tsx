@@ -1,8 +1,14 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { Container, ContenedorForm, Form } from "./styled";
+import {
+  Box,
+  Container,
+  ContenedorForm,
+  Contents,
+  Form,
+  Redireccion,
+} from "./styled";
 import { Stack, Typography, Button, CircularProgress } from "@mui/material";
 import { CssTextField } from "../../styled";
-import { loginRequest } from "../../pages/axios/axiosStore";
 import { TypeAlertT } from "../../components/alert/types";
 import { AlertGeneral } from "../../components/alert";
 import { useNavigate } from "react-router-dom";
@@ -76,11 +82,11 @@ const Login = () => {
 
   useEffect(() => {
     if (loading) {
-      if (error === undefined ) {
+      if (error === undefined) {
         if (dateUser) {
           setLoading(false);
           setProfileAuth(dateUser);
-          navigate("/SignUp");
+          navigate("/Inicio");
         }
       }
       if (isError) {
@@ -96,38 +102,50 @@ const Login = () => {
   }, [loading, dateUser, error, setProfileAuth, navigate, isError, status]);
   return (
     <Container>
-      <Form onSubmit={handleSubmit}>
-        <Typography align="center" variant="h4" component="h2" color="white">
-          Login
-        </Typography>
-        <Stack spacing={2}>
-          <ContenedorForm>
-            <CssTextField
-              label="Email"
-              name="email"
-              id="outlined-basic"
-              size="small"
-              colors={validateRequired(!dataForm?.email)}
-              bordercolors={validateRequired(!dataForm?.email)}
-              onChange={handleChangue}
-            />
-            <CssTextField
-              label="Password"
-              name="password"
-              id="outlined-basic"
-              size="small"
-              onChange={handleChangue}
-              colors={validateRequired(!dataForm?.password)}
-              bordercolors={validateRequired(!dataForm?.password)}
-            />
-          </ContenedorForm>
-        </Stack>
-        <Button type="submit" variant="contained">
-          {loading ? <CircularProgress size={15} color="inherit" /> : ""}
-          Login
-        </Button>
-      </Form>
-      <AlertGeneral setShowAlert={setShowAlert} showAlert={showAlert} />
+      <Box>
+        <Contents></Contents>
+        <Form onSubmit={handleSubmit}>
+          <Typography
+            align="center"
+            variant="h4"
+            component="h2"
+            color="white"
+            marginBottom="5px"
+          >
+            <b>LOGIN</b>
+          </Typography>
+          <Stack spacing={2}>
+            <ContenedorForm>
+              <CssTextField
+                label="Email"
+                name="email"
+                id="outlined-basic"
+                size="small"
+                colors={validateRequired(!dataForm?.email)}
+                bordercolors={validateRequired(!dataForm?.email)}
+                onChange={handleChangue}
+              />
+              <CssTextField
+                label="Password"
+                name="password"
+                id="outlined-basic"
+                size="small"
+                onChange={handleChangue}
+                colors={validateRequired(!dataForm?.password)}
+                bordercolors={validateRequired(!dataForm?.password)}
+              />
+            </ContenedorForm>
+          </Stack>
+          <Button type="submit" variant="contained">
+            {loading ? <CircularProgress size={15} color="inherit" /> : ""}
+            <b>Login</b>
+          </Button>
+          <Redireccion onClick={() => navigate("/SignUp")} color="success">
+            <b>SIGN UP?</b>
+          </Redireccion>
+        </Form>
+        <AlertGeneral setShowAlert={setShowAlert} showAlert={showAlert} />
+      </Box>
     </Container>
   );
 };

@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import imagenLogin from "./img/fondoLogin.jpg";
+import imagen from "./img/imagenLogin.jpg";
+
 export const Container = styled.div`
   display: flex;
   align-items: center;
@@ -7,25 +10,29 @@ export const Container = styled.div`
   padding: 0;
   min-width: 100vw;
   width: 100%;
-  height: 95%;
+  height: 90%;
+  background-image: url(${imagenLogin});
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 `;
+
+export const Box = styled.div`
+  width: 80%;
+  height: 80%;
+  background-color: #54abfa;
+  border-radius: 20px;
+  display: flex;
+`;
+
 export const Form = styled.form`
-  max-width: 320px;
-  width: 100%;
+  width: 30%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 50px;
-  padding: 50px 30px;
-  background-color: #4883ab;
-  -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
-  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
-  border-radius: 3px 3px 3px 3px;
-  -moz-border-radius: 3px 3px 3px 3px;
-  -webkit-border-radius: 3px 3px 3px 3px;
-
-  box-sizing: border-box;
+  background-color: #54abfa;
+  border-radius: 0px 20px 20px 0px;
+  margin: auto;
 `;
 
 export const Rows = styled.div`
@@ -37,4 +44,24 @@ export const ContenedorForm = styled.div`
   justify-content: center;
   flex-direction: column;
   gap: 20px;
+`;
+
+export const Contents = styled.div`
+  width: 50%;
+  height: 100%;
+  background-image: url(${imagen});
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border-radius: 20px 0px 0px 20px;
+`;
+
+export const Redireccion = styled.button`
+  background-color: transparent;
+  color: white;
+  border: none;
+  text-decoration: underline;
+  &:hover {
+    color: black;
+    cursor: pointer;
+  }
 `;
