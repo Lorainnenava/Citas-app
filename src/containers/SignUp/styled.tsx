@@ -1,32 +1,46 @@
 import styled from "styled-components";
+import fondoSignUp from "./img/fondoLogin.jpg";
+import imagenSignUp from "./img/imagenLogin2.png";
+
 export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0;
   padding: 0;
-  min-width: 100vw;
-  min-height: 100vh;
   width: 100%;
-  height: 100%;
+  height: 90%;
+  background-image: url(${fondoSignUp});
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 `;
+
+export const Box = styled.div`
+  width: 80%;
+  height: 80%;
+  display: flex;
+  background-color: white;
+  border-radius: 20px 20px 20px 20px;
+`;
+
+export const ImagenSignup = styled.div`
+  width: 50%;
+  height: 100%;
+  background-image: url(${imagenSignUp});
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+`;
+
 export const Form = styled.form`
-  max-width: 420px;
-  width: 100%;
+  // max-width: 420px;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 50px;
   padding: 50px 30px;
-  background-color: #4883ab;
-  -webkit-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
-  -moz-box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
-  box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
-  border-radius: 3px 3px 3px 3px;
-  -moz-border-radius: 3px 3px 3px 3px;
-  -webkit-border-radius: 3px 3px 3px 3px;
-
-  box-sizing: border-box;
+  background-color: #89cce8;
+  border-radius: 0px 20px 20px 0px;
 `;
 
 export const Rows = styled.div`
@@ -38,4 +52,21 @@ export const ContenedorForm = styled.div`
   justify-content: center;
   flex-direction: column;
   gap: 20px;
+`;
+
+export const Inicio = styled.button`
+  background-color: transparent;
+  border: none;
+  color: white;
+  margin-left: 210px;
+  &:hover {
+    cursor: pointer;
+    color: #1c3c74;
+  }
+`;
+
+export const BoxHeader = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 `;
