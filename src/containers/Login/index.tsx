@@ -30,7 +30,7 @@ const Login = () => {
     useGetUserCheckedMutation();
   if (isError) console.log(error);
 
-  const handleCangue = (
+  const handleChangue = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     e.preventDefault();
@@ -109,14 +109,14 @@ const Login = () => {
               size="small"
               colors={validateRequired(!dataForm?.email)}
               bordercolors={validateRequired(!dataForm?.email)}
-              onChange={handleCangue}
+              onChange={handleChangue}
             />
             <CssTextField
               label="Password"
               name="password"
               id="outlined-basic"
               size="small"
-              onChange={handleCangue}
+              onChange={handleChangue}
               colors={validateRequired(!dataForm?.password)}
               bordercolors={validateRequired(!dataForm?.password)}
             />

@@ -6,9 +6,8 @@ export const Container = styled.div`
   margin: 0;
   padding: 0;
   min-width: 100vw;
-  min-height: 100vh;
   width: 100%;
-  height: 100%;
+  height: 90%;
 `;
 export const Form = styled.form`
   max-width: 420px;

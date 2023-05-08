@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { TextField, Button } from "@mui/material";
+import { TextField } from "@mui/material";
+import Select from "@mui/material/Select";
 export const Container = styled.div`
   width: 100%;
   height: 100%;
@@ -42,4 +43,40 @@ export const CssTextField = styled(TextField)<{
   }
 `;
 
-export const Buttons = styled(Button)({});
+export const CssSelect = styled(Select)<{
+  colors?: string;
+  bordercolors?: string;
+}>`
+  & label.MuiSelect-focused {
+    color: ${({ colors }) => colors || "white"};
+  }
+  & .MuiSelect-focused {
+    color: ${({ colors }) => colors || "white"};
+    border-color: ${({ bordercolors }) => bordercolors || "white"};
+  }
+  & label {
+    color: ${({ colors }) => colors || "white"};
+    border-color: ${({ bordercolors }) => bordercolors || "white"};
+  }
+  & input {
+  }
+  & .MuiInputBase-root:after {
+    border-color: ${({ bordercolors }) => bordercolors || "white"};
+    color: ${({ colors }) => colors || "white"};
+  }
+  & .MuiInputBase-root {
+    & fieldset {
+      border-color: ${({ bordercolors }) => bordercolors || "white"};
+      color: ${({ colors }) => colors || "white"};
+    }
+    &:hover fieldset {
+      border-color: ${({ bordercolors }) => bordercolors || "black"};
+      color: ${({ colors }) => colors || "white"};
+    }
+    &.MuiMuiSelect-focused fieldset {
+      border-color: ${({ bordercolors }) => bordercolors || "white"};
+      color: ${({ colors }) => colors || "white"};
+    }
+    color: ${({ colors }) => colors || "white"};
+  }
+`;

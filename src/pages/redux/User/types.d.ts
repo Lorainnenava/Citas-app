@@ -7,3 +7,8 @@ export interface IUser {
   error?: SerializedError | undefined;
   status?: QueryStatus | undefined;
 }
+export interface ITypeDocument {
+  typeOfDocument?: string;
+  _id?: string;
+
+}
