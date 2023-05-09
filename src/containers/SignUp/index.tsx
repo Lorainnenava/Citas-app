@@ -53,8 +53,7 @@ const SignUp = () => {
   const dataSelects = {
     dataDocument: dataDocument,
   };
-  const [CreateNewUser] =
-    usePostUserCreatedMutation();
+  const [CreateNewUser] = usePostUserCreatedMutation();
 
   const handleChangue = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>

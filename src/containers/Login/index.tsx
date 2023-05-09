@@ -84,9 +84,18 @@ const Login = () => {
     if (loading) {
       if (error === undefined) {
         if (dateUser) {
-          setLoading(false);
-          setProfileAuth(dateUser);
-          navigate("/Inicio");
+          console.log(dateUser);
+          if (dateUser?.user?.role === "Admi" || dateUser?.user?.role === "doctor") {
+            setLoading(false);
+            setProfileAuth(dateUser);
+            navigate("/admin");
+          } else {
+            if (dateUser?.user?.role === "usuario") {
+              setLoading(false);
+              setProfileAuth(dateUser);
+              navigate("/Inicio");
+            }
+          }
         }
       }
       if (isError) {

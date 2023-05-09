@@ -25,7 +25,7 @@ export const Box = styled.div`
 `;
 
 export const Form = styled.form`
-  width: 30%;
+  width: 23%;
   display: flex;
   flex-direction: column;
   justify-content: center;
