@@ -5,12 +5,15 @@ import { ITypeDocument, IUser } from "./types";
 export const RestApi = createApi({
   reducerPath: "RestApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8900" }),
-  tagTypes: [""],
-  keepUnusedDataFor: 3,
+  tagTypes: ["refreshDataDating", "refreshDataUpdate"],
+  keepUnusedDataFor: 1,
   refetchOnMountOrArgChange: true,
   refetchOnFocus: true,
   refetchOnReconnect: true,
   endpoints: (builder) => ({
+    /**
+     * Consultas Para Usuarios
+     */
     getUserChecked: builder.mutation<IUser, Partial<IUser>>({
       query: (dataForm) => ({
         url: "/usuario",
@@ -31,6 +34,26 @@ export const RestApi = createApi({
         method: "GET",
       }),
     }),
+    /**
+     * Consultas Para Citas
+     */
+    getDating: builder.query({
+      query: (token) => ({
+        url: "/citas",
+        headers: { "Content-Type": "application/json", token },
+        method: "GET",
+      }),
+      providesTags: ["refreshDataDating"],
+    }),
+    UpdateStateDating: builder.mutation({
+      query: ({ _id, dataState, token }) => ({
+        url: `/citas/state/${_id}`,
+        method: "PUT",
+        headers: { "Content-Type": "application/json", token },
+        body: dataState,
+      }),
+      invalidatesTags: ["refreshDataDating", "refreshDataUpdate"],
+    }),
   }),
 });
 
@@ -40,4 +63,6 @@ export const {
   useGetUserCheckedMutation,
   usePostUserCreatedMutation,
   useGetTypeDocumentQuery,
+  useGetDatingQuery,
+  useUpdateStateDatingMutation,
 } = RestApi;

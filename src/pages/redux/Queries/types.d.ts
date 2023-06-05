@@ -23,3 +23,12 @@ export interface ITypeDocument {
   typeOfDocument?: string;
   _id?: string;
 }
+
+export interface IDating {
+  _id?: string;
+  date?: number;
+  doctor?: string;
+  specialty?: string;
+  state?: boolean;
+  token?: string;
+}

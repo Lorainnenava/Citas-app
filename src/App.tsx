@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Route, Routes } from "react-router";
 import Login from "./containers/Login";
 import { Container } from "./styled";
 import SignUp from "./containers/SignUp";
 import { useEffect, useState } from "react";
-/* import { useAuthStore } from "./apiZustand/index"; */
 import PaginaPrincipal from "./containers/Pagina/index";
 import Nav from "./containers/Nav/index";
 import { Main } from "./containers/Main/index";
@@ -73,7 +73,7 @@ function App() {
             />
           }
         >
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={<Admin profileAuth={profileAuth}/>} />
         </Route>
       </Routes>
     </Container>

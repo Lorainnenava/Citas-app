@@ -1,5 +1,13 @@
 import React from "react";
+import { TData } from "./types";
+import { Box } from '@mui/material';
+import { DatingList } from "./DatingList";
 
-export const Admin = () => {
-  return <div>index</div>;
+
+export const Admin: React.FC<TData> = ({ profileAuth }) => {
+  return (
+    <Box sx={{width:"100%", height:"80%"}}>
+      <DatingList profileAuth={profileAuth}/>
+    </Box>
+  );
 };

@@ -13,7 +13,7 @@ import { TypeAlertT } from "../../components/alert/types";
 import { AlertGeneral } from "../../components/alert";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../apiZustand";
-import { useGetUserCheckedMutation } from "../../pages/redux/User/resApi";
+import { useGetUserCheckedMutation } from "../../pages/redux/Queries/resApi";
 
 const Login = () => {
   const setProfileAuth = useAuthStore((state: any) => state.setProfile);
@@ -34,7 +34,6 @@ const Login = () => {
   });
   const [User, { data: dateUser, isError, error, status }] =
     useGetUserCheckedMutation();
-  if (isError) console.log(error);
 
   const handleChangue = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -84,8 +83,10 @@ const Login = () => {
     if (loading) {
       if (error === undefined) {
         if (dateUser) {
-          console.log(dateUser);
-          if (dateUser?.user?.role === "Admi" || dateUser?.user?.role === "doctor") {
+          if (
+            dateUser?.user?.role === "Admi" ||
+            dateUser?.user?.role === "doctor"
+          ) {
             setLoading(false);
             setProfileAuth(dateUser);
             navigate("/admin");
@@ -145,7 +146,7 @@ const Login = () => {
               />
             </ContenedorForm>
           </Stack>
-          <Button type="submit" variant="contained">
+          <Button type="submit" variant="contained" disabled={loading}>
             {loading ? <CircularProgress size={15} color="inherit" /> : ""}
             <b>Login</b>
           </Button>

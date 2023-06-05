@@ -1,6 +1,6 @@
 import React from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Typography, MenuItem } from "@mui/material";
+import { Typography, MenuItem, CircularProgress } from "@mui/material";
 import { Stack } from "@mui/material";
 import { Button } from "@mui/material";
 import { CssSelect, CssTextField } from "../../styled";
@@ -16,13 +16,12 @@ import {
 import {
   useGetTypeDocumentQuery,
   usePostUserCreatedMutation,
-} from "../../pages/redux/User/resApi";
+} from "../../pages/redux/Queries/resApi";
 import { useNavigate } from "react-router-dom";
 import { TypeAlertT } from "../../components/alert/types";
 import { TNewDataUser } from "./types";
 import { AlertGeneral } from "../../components/alert";
 import { SelectChangeEvent } from "@mui/material/Select";
-import { isNumericValidation } from "../../adapter";
 import { BsHouseFill } from "react-icons/bs";
 const SignUp = () => {
   /**
@@ -36,8 +35,9 @@ const SignUp = () => {
     mobileNumber: 0,
     email: "",
     password: "",
-    role: "Admi",
+    role: "usuario",
   });
+  const navigate = useNavigate();
   const [required, setRequired] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState<TypeAlertT>({
@@ -45,7 +45,7 @@ const SignUp = () => {
     type: "success",
     active: false,
   });
-  const { data: dataDocument } = useGetTypeDocumentQuery({});
+  const { data: dataDocument, } = useGetTypeDocumentQuery({});
 
   /**
    * DataSelects
@@ -109,12 +109,12 @@ const SignUp = () => {
         time: 2000,
       });
     } else {
-      setLoading(true);
+      setLoading(true)
       CreateNewUser(dataForm);
-      setRequired(false);
+      setRequired(true);
+      navigate("/Login")
     }
   };
-
   return (
     <Container>
       <Box>
@@ -206,7 +206,8 @@ const SignUp = () => {
               />
             </ContenedorForm>
           </Stack>
-          <Button type="submit" variant="contained">
+          <Button type="submit" variant="contained" disabled={loading}>
+            {loading ? <CircularProgress size={15} color="inherit" /> : ""}
             SignUp
           </Button>
         </Form>

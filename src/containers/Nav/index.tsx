@@ -13,9 +13,12 @@ import {
 } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAuthStore } from "../../apiZustand";
+import ModalComponent from "../../components/modal";
+import { CloseSession } from "./ContentModal/closeSession";
 const Nav: FC<TNavBar> = ({ profileAuth }) => {
   const navigation = useNavigate();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [openModal, setOpenModal] = useState(false);
   const setLogOut = useAuthStore((state: any) => state.logOut);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -24,12 +27,18 @@ const Nav: FC<TNavBar> = ({ profileAuth }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const handleOpen = () => {
+    setOpenModal(true);
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
   /**
    * Función para cerrar session
    */
   const logout = () => {
     setLogOut("", null);
+    setOpenModal(false);
     navigation("/");
   };
   const styles = {
@@ -40,6 +49,7 @@ const Nav: FC<TNavBar> = ({ profileAuth }) => {
       alignItems: "center",
     },
   };
+
   return (
     <>
       {profileAuth === null ? (
@@ -93,13 +103,21 @@ const Nav: FC<TNavBar> = ({ profileAuth }) => {
                 <Box sx={styles.box}>{profileAuth?.user?.mobileNumber}</Box>
                 <Box sx={styles.box}>{profileAuth?.user?.email}</Box>
                 <Box sx={styles.box}>
-                  <Button onClick={logout}>
+                  <Button onClick={handleOpen}>
                     <LogoutIcon />
                   </Button>
                 </Box>
               </Menu>
             </Stack>
           </Box>
+          <ModalComponent
+            open={openModal}
+            onClose={handleCloseModal}
+            width="400px"
+            tittle="Confirme sesión"
+          >
+            <CloseSession onClose={handleCloseModal} logout={logout} />
+          </ModalComponent>
         </Header>
       )}
     </>
