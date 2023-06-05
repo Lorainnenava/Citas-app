@@ -2,8 +2,10 @@ import styled from "styled-components";
 import { TextField } from "@mui/material";
 import Select from "@mui/material/Select";
 export const Container = styled.div`
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 export const CssTextField = styled(TextField)<{
   colors?: string;

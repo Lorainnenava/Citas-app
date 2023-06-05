@@ -11,6 +11,8 @@ import { RouteProtectedIsLogin } from "./RouterProted/RouteProtectedIsLogin";
 import { ProtectedRoute } from "./RouterProted/RouteProtected";
 import { Admin } from "./containers/Admin";
 import { useAuthStore } from "./apiZustand";
+import Layout from "./components/layout";
+import { Box } from "@mui/material";
 
 function App() {
   const profileAuth = useAuthStore((state: any) => state.profile);
@@ -35,6 +37,8 @@ function App() {
   return (
     <Container>
       <Nav profileAuth={profileAuth} />
+      <Box sx={{width: '100%', height: '90%', display: 'flex'}}>
+         {profileAuth?.user?.email && <Layout />}
       <Routes>
         <Route
           element={
@@ -73,9 +77,10 @@ function App() {
             />
           }
         >
-          <Route path="/admin" element={<Admin profileAuth={profileAuth}/>} />
+          <Route path="/admin" element={<Admin profileAuth={profileAuth}/>}  />
         </Route>
       </Routes>
+      </Box>
     </Container>
   );
 }

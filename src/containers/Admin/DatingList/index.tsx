@@ -9,6 +9,7 @@ import { TDataUser } from "./types";
 import { ToolbarList } from "./TableGrid";
 import ModalComponent from "../../../components/modal";
 import { EditStateDating } from "../ContentModal/EditStateDating";
+import Layout from "../../../components/layout";
 export const DatingList: React.FC<TDataUser> = ({ profileAuth }) => {
   const [openModal, setOpenModal] = useState(false);
   const [rows, setRows] = useState();
@@ -96,7 +97,7 @@ export const DatingList: React.FC<TDataUser> = ({ profileAuth }) => {
   return (
     <Box
       sx={{
-        width: "100%",
+        width: "85%",
         height: "100%",
         display: "flex",
         justifyContent: "center",
