@@ -13,6 +13,7 @@ import { Admin } from "./containers/Admin";
 import { useAuthStore } from "./apiZustand";
 import Layout from "./components/layout";
 import { Box } from "@mui/material";
+import PrincipalView from "./containers/Admin/views/principalView";
 
 function App() {
   const profileAuth = useAuthStore((state: any) => state.profile);
@@ -77,7 +78,8 @@ function App() {
             />
           }
         >
-          <Route path="/admin" element={<Admin profileAuth={profileAuth}/>}  />
+          <Route path="/ListaCitas" element={<Admin profileAuth={profileAuth}/>}  />
+          <Route path="/admin" element={<PrincipalView profileAuth={profileAuth}/>}  />
         </Route>
       </Routes>
       </Box>

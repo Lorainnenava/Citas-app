@@ -4,6 +4,6 @@ export const Box= styled.div`
 width: 20%;
 height: 98.8%;
 overflow:auto;
-background-color: #80b3ff;
+background-color: #6f95ff;
 padding: 5px
 `
