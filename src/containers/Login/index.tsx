@@ -132,7 +132,7 @@ const Login = () => {
                 id="outlined-basic"
                 size="small"
                 colors={validateRequired(!dataForm?.email)}
-                bordercolors={validateRequired(!dataForm?.email)}
+                borderColors={validateRequired(!dataForm?.email)}
                 onChange={handleChangue}
               />
               <CssTextField
@@ -142,7 +142,7 @@ const Login = () => {
                 size="small"
                 onChange={handleChangue}
                 colors={validateRequired(!dataForm?.password)}
-                bordercolors={validateRequired(!dataForm?.password)}
+                borderColors={validateRequired(!dataForm?.password)}
               />
             </ContenedorForm>
           </Stack>

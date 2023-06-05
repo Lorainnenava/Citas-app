@@ -7,39 +7,39 @@ export const Container = styled.div`
 `;
 export const CssTextField = styled(TextField)<{
   colors?: string;
-  bordercolors?: string;
+  borderColors?: string;
 }>`
   & label.Mui-focused {
-    color: ${({ colors }) => colors || "white"};
+    color: ${({ colors }) => colors || "secondary"};
   }
   & .Input-focused {
-    color: ${({ colors }) => colors || "white"};
-    border-color: ${({ bordercolors }) => bordercolors || "white"};
+    color: ${({ colors }) => colors || "primary"};
+    border-color: ${({ borderColors }) => borderColors || "primary"};
   }
   & label {
-    color: ${({ colors }) => colors || "white"};
-    border-color: ${({ bordercolors }) => bordercolors || "white"};
+    color: ${({ colors }) => colors || "primary"};
+    border-color: ${({ borderColors }) => borderColors || "primary"};
   }
   & input {
   }
   & .MuiInput-underline:after {
-    border-color: ${({ bordercolors }) => bordercolors || "white"};
-    color: ${({ colors }) => colors || "white"};
+    border-color: ${({ borderColors }) => borderColors || "primary"};
+    color: ${({ colors }) => colors || "primary"};
   }
   & .MuiOutlinedInput-root {
     & fieldset {
-      border-color: ${({ bordercolors }) => bordercolors || "white"};
-      color: ${({ colors }) => colors || "white"};
+      border-color: ${({ borderColors }) => borderColors || "primary"};
+      color: ${({ colors }) => colors || "primary"};
     }
     &:hover fieldset {
-      border-color: ${({ bordercolors }) => bordercolors || "black"};
-      color: ${({ colors }) => colors || "white"};
+      border-color: ${({ borderColors }) => borderColors || "secondary"};
+      color: ${({ colors }) => colors || "primary"};
     }
     &.Mui-focused fieldset {
-      border-color: ${({ bordercolors }) => bordercolors || "white"};
-      color: ${({ colors }) => colors || "white"};
+      border-color: ${({ borderColors }) => borderColors || "secondary"};
+      color: ${({ colors }) => colors || "primary"};
     }
-    color: ${({ colors }) => colors || "white"};
+    color: ${({ colors }) => colors || "primary"};
   }
 `;
 

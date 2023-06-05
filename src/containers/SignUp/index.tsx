@@ -146,7 +146,7 @@ const SignUp = () => {
                 size="small"
                 onChange={handleChangue}
                 colors={validateRequired(!dataForm?.name)}
-                bordercolors={validateRequired(!dataForm?.name)}
+                borderColors={validateRequired(!dataForm?.name)}
               />
               <CssSelect
                 name="_idtypeOfDocument"
@@ -172,7 +172,7 @@ const SignUp = () => {
                 size="small"
                 onChange={handleChangue}
                 colors={validateRequired(!dataForm?.identification)}
-                bordercolors={validateRequired(!dataForm?.identification)}
+                borderColors={validateRequired(!dataForm?.identification)}
               />
               <CssTextField
                 label="Mobile Number"
@@ -184,7 +184,7 @@ const SignUp = () => {
                   handleChangue(e);
                 }}
                 colors={validateRequired(!dataForm?.mobileNumber)}
-                bordercolors={validateRequired(!dataForm?.mobileNumber)}
+                borderColors={validateRequired(!dataForm?.mobileNumber)}
               />
               <CssTextField
                 label="Email"
@@ -193,7 +193,7 @@ const SignUp = () => {
                 size="small"
                 onChange={handleChangue}
                 colors={validateRequired(!dataForm?.email)}
-                bordercolors={validateRequired(!dataForm?.email)}
+                borderColors={validateRequired(!dataForm?.email)}
               />
               <CssTextField
                 label="Password"
@@ -202,7 +202,7 @@ const SignUp = () => {
                 size="small"
                 onChange={handleChangue}
                 colors={validateRequired(!dataForm?.password)}
-                bordercolors={validateRequired(!dataForm?.password)}
+                borderColors={validateRequired(!dataForm?.password)}
               />
             </ContenedorForm>
           </Stack>
