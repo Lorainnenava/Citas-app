@@ -44,7 +44,7 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
-
+  console.log(dataForm);
   /**
    * Validad campos requeridos
    */
