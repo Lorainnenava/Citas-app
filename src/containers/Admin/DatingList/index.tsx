@@ -4,12 +4,11 @@ import {
   useUpdateStateDatingMutation,
 } from "../../../pages/redux/Queries/resApi";
 import { DataGrid, GridColDef, esES } from "@mui/x-data-grid";
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { TDataUser } from "./types";
 import { ToolbarList } from "./TableGrid";
 import ModalComponent from "../../../components/modal";
 import { EditStateDating } from "../ContentModal/EditStateDating";
-import Layout from "../../../components/layout";
 export const DatingList: React.FC<TDataUser> = ({ profileAuth }) => {
   const [openModal, setOpenModal] = useState(false);
   const [rows, setRows] = useState();

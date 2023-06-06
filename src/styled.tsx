@@ -6,6 +6,7 @@ export const Container = styled.div`
     height: 100%;
   display: flex;
   flex-direction: column;
+  margin: 0px
 `;
 export const CssTextField = styled(TextField)<{
   colors?: string;
