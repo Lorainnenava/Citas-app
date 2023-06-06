@@ -21,7 +21,7 @@ const Layout: FC = () => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <Link href="/a" sx={{textDecoration:'none', color: 'black'}}>
+            <Link href="/usuario" sx={{textDecoration:'none', color: 'black'}}>
             INFORMACION PERSONAL
             </Link>
           </Typography>
@@ -40,7 +40,7 @@ const Layout: FC = () => {
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
-            <Link href="/a" sx={{textDecoration:'none', color: 'black'}}>
+            <Link href="/ListaCitas" sx={{textDecoration:'none', color: 'black'}}>
             CITAS PENDIENTES
             </Link>
           </Typography>

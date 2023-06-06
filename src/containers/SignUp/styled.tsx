@@ -9,7 +9,7 @@ export const Container = styled.div`
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 90%;
+  height: 100%;
   background-image: url(${fondoSignUp});
   background-size: 100% 100%;
   background-repeat: no-repeat;

@@ -10,7 +10,7 @@ export const Container = styled.div`
   padding: 0;
   min-width: 100vw;
   width: 100%;
-  height: 90%;
+  height: 100%;
   background-image: url(${imagenLogin});
   background-size: 100% 100%;
   background-repeat: no-repeat;

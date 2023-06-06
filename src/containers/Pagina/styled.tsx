@@ -11,7 +11,7 @@ interface CartaImagen {
 
 export const Container = styled.div`
   width: 100%;
-  height: 90%;
+  height: 100%;
 `;
 
 export const Portada = styled.div`
@@ -26,7 +26,7 @@ export const Portada = styled.div`
 
 export const Box = styled.div`
   width: 45%;
-  height: 28%;
+  height: 32%;
   display: flex;
   gap: 10px;
   margin-bottom: 130px;
@@ -34,7 +34,7 @@ export const Box = styled.div`
 `;
 
 export const Carta = styled.button<CartaProps>`
-  width: 25%;
+  width: 28%;
   height: 100%;
   background-color: ${(props) => props.backgroundColor};
   box-shadow: 0px 5px 5px gray;
