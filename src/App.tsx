@@ -65,7 +65,7 @@ function App() {
             />
           }
         >
-          <Route path="/Inicio" element={<Main />} />
+          <Route path="/Inicio" element={<Main profileAuth={profileAuth}/>} />
         </Route>
         <Route
           element={
