@@ -68,7 +68,7 @@ citas.get("/", verifyToken, async (req, res) => {
     res.status(500).json({ msg: "Error al obtener el usuario" });
   }
 });
-//aCTUALIZAR ESTADO CITA
+//ACTUALIZAR ESTADO CITA
 citas.put("/state/:id", verifyToken, async (req, res) => {
   const { id } = req.params;
   const { _id } = req.headers;

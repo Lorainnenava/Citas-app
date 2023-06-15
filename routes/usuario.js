@@ -2,6 +2,7 @@ const express = require("express");
 const usuarios = express.Router();
 const UsuarioSchema = require("../model/modeloUsuario");
 const jwt = require("jsonwebtoken");
+const verifyToken = require("../middleware/middleware");
 require("dotenv").config();
 
 //CREAR USUARIO
@@ -68,9 +69,29 @@ usuarios.patch("/", async (req, res) => {
 });
 
 //VER USUARIOS
-usuarios.get("/", async (req, res) => {
-  UsuarioSchema.find()
+usuarios.get("/", verifyToken,async (req, res) => {
+  const { _id } = req.headers;
+  try {
+    const usuario = await UsuarioSchema.findOne({ _id: _id });
+    const rolUsuario = usuario.role;
+    if(rolUsuario === "Admi"){
+    UsuarioSchema.find({})
+    .populate({
+          path: "_idtypeOfDocument",
+          populate: {
+            path: "typeOfDocument",
+            select: "",
+          },
+        })
     .then((data) => res.json(data))
     .catch((error) => res.json(error));
+    }else{
+        UsuarioSchema.find({ _idUser: `${_id}` })
+        .then((data) => res.json(data))
+        .catch((error) => res.json(error));
+    }
+  } catch (error) {
+    res.status(500).json({ msg: "Error al obtener el usuario" });
+  }
 });
 module.exports = usuarios;
