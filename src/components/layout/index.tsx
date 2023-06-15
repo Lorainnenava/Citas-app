@@ -33,7 +33,6 @@ const Layout: FC = () => {
           aria-controls="panel2a-content"
           id="panel2a-header"
           sx={{backgroundColor: "#80b3ff" }}
-
         >
           <EditCalendarIcon sx={{marginRight:'5px'}}/>
           <Typography>CITAS</Typography>

@@ -81,7 +81,7 @@ function App() {
         >
           <Route path="/ListaCitas" element={<Admin profileAuth={profileAuth}/>}  />
           <Route path="/admin" element={<PrincipalView profileAuth={profileAuth}/>}  />
-          <Route path="/usuario" element={<Usuario /* profileAuth={profileAuth} *//>}  />
+          <Route path="/usuario" element={<Usuario profileAuth={profileAuth}/>}  />
         </Route>
       </Routes>
       </Box>

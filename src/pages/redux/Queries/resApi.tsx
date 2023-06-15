@@ -20,6 +20,12 @@ export const RestApi = createApi({
         method: "PATCH",
         body: dataForm,
       }),
+    }),getUsers: builder.query({
+      query: (token) => ({
+        url: "/usuario",
+        headers: { "Content-Type": "application/json", token },
+        method: "GET",
+      }),
     }),
     PostUserCreated: builder.mutation({
       query: (newUser) => ({
@@ -65,4 +71,5 @@ export const {
   useGetTypeDocumentQuery,
   useGetDatingQuery,
   useUpdateStateDatingMutation,
+  useGetUsersQuery,
 } = RestApi;
