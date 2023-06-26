@@ -44,7 +44,7 @@ const Login = () => {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(dataForm);
+
   /**
    * Validad campos requeridos
    */
@@ -63,7 +63,6 @@ const Login = () => {
    */
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // const data = await loginRequest(dataForm);
     if (!dataForm?.email || !dataForm?.password) {
       setRequired(true);
       setShowAlert({

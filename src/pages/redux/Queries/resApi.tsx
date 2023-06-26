@@ -20,20 +20,25 @@ export const RestApi = createApi({
         method: "PATCH",
         body: dataForm,
       }),
-    }),getUsers: builder.query({
+    }),
+    //obtener usuarios
+    getUsers: builder.query({
       query: (token) => ({
         url: "/usuario",
         headers: { "Content-Type": "application/json", token },
         method: "GET",
       }),
     }),
+    // crear usuario
     PostUserCreated: builder.mutation({
-      query: (newUser) => ({
+      query: ({newUser,token}) => ({
         url: "/usuario",
         method: "POST",
+        headers: { "Content-Type": "application/json", token },
         body: newUser,
       }),
     }),
+    // obtener tipo de documento
     getTypeDocument: builder.query<Array<ITypeDocument>, ITypeDocument>({
       query: () => ({
         url: "/documento",
@@ -51,6 +56,7 @@ export const RestApi = createApi({
       }),
       providesTags: ["refreshDataDating"],
     }),
+    // actualizar estado de citas
     UpdateStateDating: builder.mutation({
       query: ({ _id, dataState, token }) => ({
         url: `/citas/state/${_id}`,
