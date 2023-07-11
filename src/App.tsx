@@ -15,6 +15,7 @@ import Layout from "./components/layout";
 import { Box } from "@mui/material";
 import PrincipalView from "./containers/Admin/views/principalView";
 import Usuario from "./containers/Admin/views/usuario";
+import { RegisterPatient } from "./containers/Admin/views/registerPatient";
 
 function App() {
   const profileAuth = useAuthStore((state: any) => state.profile);
@@ -81,7 +82,8 @@ function App() {
         >
           <Route path="/ListaCitas" element={<Admin profileAuth={profileAuth}/>}  />
           <Route path="/admin" element={<PrincipalView profileAuth={profileAuth}/>}  />
-          <Route path="/usuario" element={<Usuario /* profileAuth={profileAuth} *//>}  />
+          <Route path="/registrarUsuario" element={<RegisterPatient profileAuth={profileAuth}/>}  />
+          <Route path="/listaUsuarios" element={<Usuario profileAuth={profileAuth}/>}  />
         </Route>
       </Routes>
       </Box>
