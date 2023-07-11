@@ -15,7 +15,7 @@ export const Container = styled.div`
   background-repeat: no-repeat;
 `;
 
-export const Box = styled.div`
+export const Box1 = styled.div`
   width: 80%;
   height: 80%;
   display: flex;
@@ -32,15 +32,15 @@ export const ImagenSignup = styled.div`
 `;
 
 export const Form = styled.form`
-  // max-width: 420px;
-  width: 50%;
   display: flex;
+  width: 320px;
   flex-direction: column;
   justify-content: center;
-  gap: 50px;
-  padding: 50px 30px;
-  background-color: #89cce8;
-  border-radius: 0px 20px 20px 0px;
+  gap: 30px;
+  padding: 30px;
+  background-color: #ffffff;
+  box-shadow: 0px 3px 5px 0px #1070ac;
+  border-radius: 5px;
 `;
 
 export const Rows = styled.div`
@@ -54,19 +54,17 @@ export const ContenedorForm = styled.div`
   gap: 20px;
 `;
 
-export const Inicio = styled.button`
+export const Inicio = styled.div`
   background-color: transparent;
-  border: none;
-  color: white;
-  margin-left: 210px;
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  color: #54abfa;
   &:hover {
-    cursor: pointer;
-    color: #1c3c74;
+    color: #3574af;
   }
 `;
 
 export const BoxHeader = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: flex-end;
 `;

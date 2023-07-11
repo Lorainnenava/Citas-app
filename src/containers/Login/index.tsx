@@ -1,13 +1,12 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { Box1, Container, ContenedorForm, Contents, Form } from "./styled";
 import {
+  Stack,
+  Typography,
+  Button,
+  CircularProgress,
   Box,
-  Container,
-  ContenedorForm,
-  Contents,
-  Form,
-  Redireccion,
-} from "./styled";
-import { Stack, Typography, Button, CircularProgress } from "@mui/material";
+} from "@mui/material";
 import { CssTextField } from "../../styled";
 import { TypeAlertT } from "../../components/alert/types";
 import { AlertGeneral } from "../../components/alert";
@@ -112,50 +111,79 @@ const Login = () => {
   }, [loading, dateUser, error, setProfileAuth, navigate, isError, status]);
   return (
     <Container>
-      <Box>
-        <Contents></Contents>
-        <Form onSubmit={handleSubmit}>
-          <Typography
-            align="center"
-            variant="h4"
-            component="h2"
-            color="white"
-            marginBottom="5px"
-          >
-            <b>LOGIN</b>
-          </Typography>
-          <Stack spacing={2}>
-            <ContenedorForm>
-              <CssTextField
-                label="Email"
-                name="email"
-                id="outlined-basic"
-                size="small"
-                colors={validateRequired(!dataForm?.email)}
-                borderColors={validateRequired(!dataForm?.email)}
-                onChange={handleChangue}
-              />
-              <CssTextField
-                label="Password"
-                name="password"
-                id="outlined-basic"
-                size="small"
-                onChange={handleChangue}
-                colors={validateRequired(!dataForm?.password)}
-                borderColors={validateRequired(!dataForm?.password)}
-              />
-            </ContenedorForm>
-          </Stack>
-          <Button type="submit" variant="contained" disabled={loading}>
-            {loading ? <CircularProgress size={15} color="inherit" /> : ""}
-            <b>Login</b>
-          </Button>
-          <Redireccion onClick={() => navigate("/SignUp")} color="success">
-            <b>SIGN UP?</b>
-          </Redireccion>
-        </Form>
+      <Box1>
+        <Contents />
+        <Box
+          sx={{
+            width: "50%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            gap: "50px",
+            backgroundColor: "#54abfa",
+            borderRadius: "0px 20px 20px 0px",
+            alignItems: "center",
+          }}
+        >
+          <Form onSubmit={handleSubmit}>
+            <Typography
+              align="center"
+              variant="h6"
+              component="h2"
+              color="#54abfa"
+              marginTop="5px"
+            >
+              <b>LOGIN</b>
+            </Typography>
+            <Stack spacing={2}>
+              <ContenedorForm>
+                <CssTextField
+                  label="Email"
+                  name="email"
+                  id="outlined-basic"
+                  size="small"
+                  colors={validateRequired(!dataForm?.email)}
+                  borderColors={validateRequired(!dataForm?.email)}
+                  onChange={handleChangue}
+                />
+                <CssTextField
+                  label="Password"
+                  name="password"
+                  id="outlined-basic"
+                  size="small"
+                  onChange={handleChangue}
+                  colors={validateRequired(!dataForm?.password)}
+                  borderColors={validateRequired(!dataForm?.password)}
+                />
+              </ContenedorForm>
+            </Stack>
+            <Box display="flex" flexDirection="column" gap="10px">
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ backgroundColor: "#54abfa" }}
+                disabled={loading}
+              >
+                {loading ? <CircularProgress size={15} color="inherit" /> : ""}
+                <b>Login</b>
+              </Button>
+              <Button
+                variant="contained"
+                onClick={() => navigate("/SignUp")}
+                sx={{
+                  backgroundColor: "#42b72a",
+                  "&:hover": {
+                    backgroundColor: "#3a9d23",
+                  },
+                }}
+              >
+                <b>SIGN UP?</b>
+              </Button>
+            </Box>
+          </Form>
+        </Box>
         <AlertGeneral setShowAlert={setShowAlert} showAlert={showAlert} />
-      </Box>
+      </Box1>
     </Container>
   );
 };

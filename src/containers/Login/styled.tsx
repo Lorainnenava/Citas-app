@@ -16,23 +16,23 @@ export const Container = styled.div`
   background-repeat: no-repeat;
 `;
 
-export const Box = styled.div`
+export const Box1 = styled.div`
   width: 80%;
   height: 80%;
   background-color: #54abfa;
-  border-radius: 20px;
+  border-radius: 20px;  
   display: flex;
 `;
 
 export const Form = styled.form`
-  width: 23%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 50px;
-  background-color: #54abfa;
-  border-radius: 0px 20px 20px 0px;
-  margin: auto;
+  gap: 30px;
+  padding: 40px;
+  background-color: #ffffff;
+  box-shadow: 0px 3px 5px 0px #1070ac;
+  border-radius: 5px;
 `;
 
 export const Rows = styled.div`
@@ -55,13 +55,4 @@ export const Contents = styled.div`
   border-radius: 20px 0px 0px 20px;
 `;
 
-export const Redireccion = styled.button`
-  background-color: transparent;
-  color: white;
-  border: none;
-  text-decoration: underline;
-  &:hover {
-    color: black;
-    cursor: pointer;
-  }
-`;
+

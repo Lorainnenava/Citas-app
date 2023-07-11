@@ -1,11 +1,11 @@
 import React from "react";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Typography, MenuItem, CircularProgress } from "@mui/material";
+import { Typography, CircularProgress } from "@mui/material";
 import { Stack } from "@mui/material";
-import { Button } from "@mui/material";
-import { CssSelect, CssTextField } from "../../styled";
+import { Button, Box } from "@mui/material";
+import { CssTextField } from "../../styled";
 import {
-  Box,
+  Box1,
   BoxHeader,
   Container,
   ContenedorForm,
@@ -23,6 +23,7 @@ import { TNewDataUser } from "./types";
 import { AlertGeneral } from "../../components/alert";
 import { SelectChangeEvent } from "@mui/material/Select";
 import { BsHouseFill } from "react-icons/bs";
+import { SelectAdapter } from "../../FormAdaptar/selectAdapter";
 const SignUp = () => {
   /**
    *Stages
@@ -45,7 +46,7 @@ const SignUp = () => {
     type: "success",
     active: false,
   });
-  const { data: dataDocument, } = useGetTypeDocumentQuery({});
+  const { data: dataDocument } = useGetTypeDocumentQuery({});
 
   /**
    * DataSelects
@@ -65,25 +66,25 @@ const SignUp = () => {
     });
   };
   const handleChangueSelect = (
-    event: SelectChangeEvent<unknown>,
-    child: React.ReactNode
+    event: React.ChangeEvent<{ value: unknown }> | SelectChangeEvent<unknown>
   ) => {
     event.preventDefault();
-    setDataForm({
-      ...dataForm,
-      [event.target.name]: event.target.value,
-    });
+    const { name, value } = event.target as HTMLInputElement;
+    setDataForm((prevDataForm) => ({
+      ...prevDataForm,
+      [name]: value,
+    }));
   };
 
   /**
    * Validad campos requeridos
    */
   const validateRequired = (field?: boolean) => {
-    let color: "red" | "";
+    let color: "red" | undefined;
     if (field && required) {
       color = "red";
     } else {
-      color = "";
+      color = undefined;
     }
     return color;
   };
@@ -109,110 +110,137 @@ const SignUp = () => {
         time: 2000,
       });
     } else {
-      setLoading(true)
+      setLoading(true);
       CreateNewUser(dataForm);
       setRequired(true);
-      navigate("/Login")
+      navigate("/Login");
     }
   };
   return (
     <Container>
-      <Box>
+      <Box1>
         <ImagenSignup></ImagenSignup>
-        <Form onSubmit={handleSubmit}>
-          <BoxHeader>
-            <Typography
-              align="center"
-              variant="h4"
-              component="h2"
-              color="white"
-            >
-              <b>SIGN UP</b>
-              <Inicio
-                onClick={() => {
-                  navigation("/Login");
-                }}
-              >
-                <BsHouseFill size={30} />
+        <Box
+          sx={{
+            width: "50%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            gap: "50px",
+            backgroundColor: "#54abfa",
+            borderRadius: "0px 20px 20px 0px",
+            alignItems: "center",
+          }}
+        >
+          <Form onSubmit={handleSubmit}>
+            <BoxHeader>
+              <Inicio>
+                <BsHouseFill
+                  size={30}
+                  cursor="pointer"
+                  onClick={() => {
+                    navigation("/Login");
+                  }}
+                />
               </Inicio>
-            </Typography>
-          </BoxHeader>
-          <Stack spacing={2}>
-            <ContenedorForm>
-              <CssTextField
-                label="Name"
-                name="name"
-                id="outlined-basic"
-                size="small"
-                onChange={handleChangue}
-                colors={validateRequired(!dataForm?.name)}
-                borderColors={validateRequired(!dataForm?.name)}
-              />
-              <CssSelect
-                name="_idtypeOfDocument"
-                id="_id"
-                size="small"
-                onChange={handleChangueSelect}
-                value={dataForm?._idtypeOfDocument || ""}
-                colors={validateRequired(!dataForm?._idtypeOfDocument)}
-                bordercolors={validateRequired(!dataForm?._idtypeOfDocument)}
+              <Typography
+                align="center"
+                variant="h6"
+                component="h2"
+                color="#54abfa"
+                marginTop="5px"
               >
-                {dataSelects?.dataDocument?.map((x) => {
-                  return (
-                    <MenuItem value={x?._id} key={x?.typeOfDocument}>
-                      {x?.typeOfDocument}
-                    </MenuItem>
-                  );
-                })}
-              </CssSelect>
-              <CssTextField
-                label="Identification"
-                name="identification"
-                id="outlined-basic"
-                size="small"
-                onChange={handleChangue}
-                colors={validateRequired(!dataForm?.identification)}
-                borderColors={validateRequired(!dataForm?.identification)}
-              />
-              <CssTextField
-                label="Mobile Number"
-                name="mobileNumber"
-                type="text"
-                id="outlined-basic"
-                size="small"
-                onChange={(e) => {
-                  handleChangue(e);
-                }}
-                colors={validateRequired(!dataForm?.mobileNumber)}
-                borderColors={validateRequired(!dataForm?.mobileNumber)}
-              />
-              <CssTextField
-                label="Email"
-                name="email"
-                id="outlined-basic"
-                size="small"
-                onChange={handleChangue}
-                colors={validateRequired(!dataForm?.email)}
-                borderColors={validateRequired(!dataForm?.email)}
-              />
-              <CssTextField
-                label="Password"
-                name="password"
-                id="outlined-basic"
-                size="small"
-                onChange={handleChangue}
-                colors={validateRequired(!dataForm?.password)}
-                borderColors={validateRequired(!dataForm?.password)}
-              />
-            </ContenedorForm>
-          </Stack>
-          <Button type="submit" variant="contained" disabled={loading}>
-            {loading ? <CircularProgress size={15} color="inherit" /> : ""}
-            SignUp
-          </Button>
-        </Form>
+                <b>SIGN UP</b>
+              </Typography>
+            </BoxHeader>
+            <Stack spacing={2}>
+              <ContenedorForm>
+                <CssTextField
+                  label="Name"
+                  name="name"
+                  id="outlined-basic"
+                  size="small"
+                  onChange={handleChangue}
+                  colors={validateRequired(!dataForm?.name)}
+                  borderColors={validateRequired(!dataForm?.name)}
+                />
+                <SelectAdapter
+                  label="Tipo de documento"
+                  name="_idtypeOfDocument"
+                  onChange={handleChangueSelect}
+                  options={
+                    dataSelects.dataDocument?.map((x) => {
+                      return {
+                        value: x?._id,
+                        label: x?.typeOfDocument,
+                      };
+                    }) || []
+                  }
+                  // color={
+                  //   validateRequired(!dataForm?._idtypeOfDocument)
+                  //     ? ("red" as "red")
+                  //     : undefined
+                  // }
+                  borderColor={
+                    validateRequired(!dataForm?._idtypeOfDocument)
+                      ? ("red" as "red")
+                      : undefined
+                  }
+                />
+                <CssTextField
+                  label="Identification"
+                  name="identification"
+                  id="outlined-basic"
+                  size="small"
+                  onChange={handleChangue}
+                  colors={validateRequired(!dataForm?.identification)}
+                  borderColors={validateRequired(!dataForm?.identification)}
+                />
+                <CssTextField
+                  label="Mobile Number"
+                  name="mobileNumber"
+                  type="text"
+                  id="outlined-basic"
+                  size="small"
+                  onChange={(e) => {
+                    handleChangue(e);
+                  }}
+                  colors={validateRequired(!dataForm?.mobileNumber)}
+                  borderColors={validateRequired(!dataForm?.mobileNumber)}
+                />
+                <CssTextField
+                  label="Email"
+                  name="email"
+                  id="outlined-basic"
+                  size="small"
+                  onChange={handleChangue}
+                  colors={validateRequired(!dataForm?.email)}
+                  borderColors={validateRequired(!dataForm?.email)}
+                />
+                <CssTextField
+                  label="Password"
+                  name="password"
+                  id="outlined-basic"
+                  size="small"
+                  onChange={handleChangue}
+                  colors={validateRequired(!dataForm?.password)}
+                  borderColors={validateRequired(!dataForm?.password)}
+                />
+              </ContenedorForm>
+            </Stack>
+            <Button
+              type="submit"
+              variant="contained"
+              disabled={loading}
+              sx={{ backgroundColor: "#54abfa" }}
+            >
+              {loading ? <CircularProgress size={15} color="inherit" /> : ""}
+              SignUp
+            </Button>
+          </Form>
+        </Box>
         <AlertGeneral setShowAlert={setShowAlert} showAlert={showAlert} />
-      </Box>
+      </Box1>
     </Container>
   );
 };
