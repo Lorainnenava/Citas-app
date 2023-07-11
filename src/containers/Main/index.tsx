@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Grid, Typography, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { CssTextField } from "../../styled";
+import { BoxText, Containers, CssTextField, text } from "../../styled";
 import SaveIcon from "@mui/icons-material/Save";
 import { TDataUser } from "./types";
 
@@ -23,7 +23,7 @@ export const Main: React.FC<TDataUser> = ({ profileAuth }) => {
       },
     },
     grid: {
-      padding: "10px",
+      padding: "20px",
       flexWrap: "wrap",
       marginBottom: "5px",
     },
@@ -55,24 +55,13 @@ export const Main: React.FC<TDataUser> = ({ profileAuth }) => {
   };
   return (
     <Box sx={{ padding: "20px", backgroundColor: "#E0E0E0", width: "100%" }}>
-      <Typography
-        variant="h5"
-        component="h3"
-        color="primary"
-        gutterBottom
-        style={{ fontFamily: "sans-serif" }}
-      >
-        Solicitar Cita
-      </Typography>
-      <Box
-        sx={{
-          backgroundColor: "#ffffff",
-          padding: "20px",
-          boxShadow: "0px 3px 5px 0px #dcdcdc",
-          borderRadius: "5px ",
-        }}
-      >
-        <Typography sx={style.title}>Información general</Typography>
+      <Typography style={text}>Solicitar Cita</Typography>
+      <Containers>
+        <BoxText>
+          <Typography style={{ marginLeft: "20px" }}>
+            Información general
+          </Typography>
+        </BoxText>
         <Grid
           container
           spacing={2}
@@ -135,7 +124,7 @@ export const Main: React.FC<TDataUser> = ({ profileAuth }) => {
             />
           </Grid>
         </Grid>
-      </Box>
+      </Containers>
       <Box
         sx={{
           display: "flex",

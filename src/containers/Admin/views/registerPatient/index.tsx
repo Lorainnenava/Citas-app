@@ -4,7 +4,8 @@ import { usePostUserCreatedMutation } from "../../../../pages/redux/Queries/resA
 import { UserInformation } from "./userInformation"
 import { MedicalInformation } from "./medicalInformation"
 import { Box, Button, Typography } from "@mui/material"
-import { BoxButton, BoxRegister, Form, text } from "../styled"
+import { BoxButton, BoxRegister, Form } from "../styled"
+import { text } from "../../../../styled"
 
 export const RegisterPatient:FC<TAdmin> = ({profileAuth}) => {
     const[create,{data, isError, error, isSuccess}]= usePostUserCreatedMutation(profileAuth?.token)
